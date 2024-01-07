@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>C&E Admin Console</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <h1 class="admin-title">Admin Console</h1>
+    <p class="admin-subtitle">Change Countdown Date</p>
+    
+    <form id="admin-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+      <label for="new-date">New Countdown Date:</label>
+      <input type="datetime-local" id="new-date" name="new-date" required><br><br>
+      <button type="submit">Update Countdown Date</button>
+    </form>
+    
+    <div class="message-box" id="message-box"></div>
+  </div>
+
+  <script>
+    document.getElementById("admin-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      var validUsers = {
+        "Eve": "shitfuck123",
+        "Christian": "fuckshit123"
+      };
+
+      if (validUsers.hasOwnProperty(username) && validUsers[username] === password) {
+        var newDate = new Date(document.getElementById("new-date").value);
+        localStorage.setItem("countdownDate", newDate.toISOString());
+
+        var messageBox = document.getElementById("message-box");
+        messageBox.textContent = "Countdown date updated successfully!";
+        messageBox.classList.add("message-box", "success-message");
+      } else {
+        var messageBox = document.getElementById("message-box");
+        messageBox.textContent = "Invalid credentials. Please try again.";
+        messageBox.classList.add("message-box", "error-message");
+      }
+    });
+  </script>
+</body>
+</html>

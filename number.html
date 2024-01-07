@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>C&E Number</title>
+  <meta name="description" content="Christian and Eve">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a href="./countdown.html">
+    <button id="countdown-button">Next Date</button>
+  </a>
+  
+  <nav>
+    <a href="./index.html">Met</a>
+    <a href="./number.html" class="active">Number</a>
+    <a href="./firstdate.html">First Date</a>
+    <a href="./firstfacetime.html">First FaceTime</a>
+    <a href="./firstlunch.html">First Lunch Out</a>
+    <a href="./askedout.html">Asked Out</a>
+    <a href="./firstmorning.html">First Morning Walk</a>
+		<a href="./firstkiss.html">First Kiss</a>
+		<a href="./firsthug.html">First Hug</a>
+		<a href="./holdinghands.html">First Holding Hands</a>
+  </nav>
+
+  <div id="timer"></div>
+
+  <script>
+    function updateTimer() {
+      // yyyy-MM-dd HH:mm:ss
+      past = Date.parse("2022-12-14 12:30:00");
+      now = new Date();
+      diff = now - past;
+
+      years = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12));
+      months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+      weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+      days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      hours = Math.floor(diff / (1000 * 60 * 60));
+      mins = Math.floor(diff / (1000 * 60));
+      secs = Math.floor(diff / 1000);
+
+      y = years;
+      M = months - years * 12;
+      d = days - months * 30;
+      h = hours - days * 24;
+      m = mins - hours * 60;
+      s = secs - mins * 60;
+      document.getElementById("timer").innerHTML =
+        '<div><span>Time since: 14/12/2022 12:30:00</span></div><br>' +
+        '<div>' + y + '<span>years</span></div>' +
+        '<div>' + M + '<span>months</span></div>' +
+        '<div>' + d + '<span>days</span></div>' +
+        '<div>' + h + '<span>hours</span></div>' +
+        '<div>' + m + '<span>minutes</span></div>' +
+        '<div>' + s + '<span>seconds</span></div><br><br>' +
+        '<div>' + days + '<span>days</span></div>';
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer(); // Initial timer update
+  </script>
+
+  <br><br>
+  <br><br>
+</body>
+</html>
