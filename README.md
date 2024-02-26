@@ -21,12 +21,6 @@
 		<loc>https://christianandeve.co.uk/firstfacetime.html</loc>
 	</url>
 	<url>
-		<loc>https://christianandeve.co.uk/countdown.html</loc>
-	</url>
-	<url>
-		<loc>https://christianandeve.co.uk/admin.html</loc>
-	</url>
-	<url>
 		<loc>https://christianandeve.co.uk/firstkiss.html</loc>
 	</url>
 	<url>
@@ -34,5 +28,8 @@
 	</url>
 	<url>
 		<loc>https://christianandeve.co.uk/holdinghands.html</loc>
+	</url>
+	<url>
+		<loc>https://christianandeve.co.uk/firstoxford.html</loc>
 	</url>
 </urlset>
