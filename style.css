@@ -1,3 +1,4 @@
+/* General styling for the active state */
 nav a.active {
   color: #48C8FF;
 }
@@ -6,6 +7,7 @@ nav a.active {
   background-color: #48C8FF;
 }
 
+/* Body styling */
 body {
   text-align: center;
   padding: 70px 50px;
@@ -14,10 +16,13 @@ body {
   color: #fff;
 }
 
+/* Navbar styles */
 nav {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
   margin-top: 50px;
+  gap: 20px; /* Add spacing between links */
 }
 
 nav a {
@@ -32,6 +37,7 @@ nav a:hover {
   color: #48C8FF;
 }
 
+/* Timer and countdown styling */
 #timer, #countdown {
   font-size: 4em;
   font-weight: 100;
@@ -60,6 +66,7 @@ nav a:hover {
   text-shadow: 0 0 10px #48C8FF;
 }
 
+/* Countdown button styles */
 #countdown-button {
   display: block;
   margin: 0 auto;
@@ -75,4 +82,16 @@ nav a:hover {
 
 #countdown-button:hover {
   background-color: #48C8FF;
+}
+
+/* Responsive navbar for smaller screens */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align the items */
+  }
+
+  nav a {
+    margin: 10px 0; /* Add vertical spacing */
+  }
 }
