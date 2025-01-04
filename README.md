@@ -32,4 +32,7 @@
 	<url>
 		<loc>https://christianandeve.co.uk/firstoxford.html</loc>
 	</url>
+	<url>
+		<loc>https://christianandeve.co.uk/firstbirmingham.html</loc>
+	</url>
 </urlset>
