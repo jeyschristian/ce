@@ -8,9 +8,15 @@ nav a.active {
 }
 
 /* Body styling */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Ensure the body fills the full height of the window */
+}
+
 body {
   text-align: center;
-  padding: 70px 50px;
+  padding: 10px 50px; /* Reduced top padding */
   background: #0D1A29;
   font-family: "Helvetica Neue", "Open Sans", helvetica, arial, sans-serif;
   color: #fff;
@@ -134,4 +140,28 @@ nav a:hover {
   border: 2px solid #fff;
   background-color: transparent;
   vertical-align: middle;
+}
+
+/* Style for the menu button */
+nav a.menu-button {
+  font-size: 18px; /* Larger font size */
+  font-weight: bold; /* Make the text bold */
+  padding: 10px 20px; /* Add padding for clickable area */
+  background-color: #007bff; /* Blue background color */
+  color: white; /* White text color */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+/* Style for hover effect */
+nav a.menu-button:hover {
+  background-color: #0056b3; /* Darker blue when hovered */
+  transform: scale(1.1); /* Slightly enlarge the button on hover */
+}
+
+/* Optional: Make it stand out more when clicked or active */
+nav a.menu-button.clicked {
+  background-color: #28a745; /* Green background for clicked link */
+  color: white; /* White text */
 }

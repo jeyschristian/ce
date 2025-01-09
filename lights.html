@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>C&E Met</title>
+  <meta name="description" content="Christian and Eve">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>  
+ 
+  <nav>
+    <a href="./index.html" class="menu-button">Menu</a>
+  </nav>
+
+  <br><br>
+
+  <div id="color-buttons">
+    <label for="button2">Ok?:</label>
+    <select id="button2">
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="red">Red</option>
+    </select>
+    <span id="colorIndicator2" class="color-indicator"></span>
+  
+    <label for="button1">Me?:</label>
+    <select id="button1">
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="red">Red</option>
+    </select>
+    <span id="colorIndicator1" class="color-indicator"></span>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getFirestore, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKhQ0iwwb9goPpChGJ-cHeavc3anomVdo",
+      authDomain: "ce-database.firebaseapp.com",
+      projectId: "ce-database",
+      storageBucket: "ce-database.firebasestorage.app",
+      messagingSenderId: "611746417993",
+      appId: "1:611746417993:web:5b343648df47a10397de98",
+      measurementId: "G-ED09MHFNE9"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getFirestore(app);
+
+    // Document reference
+    const docRef = doc(database, 'TrafficLightStatus', 'Lights');
+
+    // Elements
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const colorIndicator1 = document.getElementById('colorIndicator1');
+    const colorIndicator2 = document.getElementById('colorIndicator2');
+
+    // Function to update color in Firestore
+    async function updateColor(field, color) {
+      const updateData = {};
+      updateData[field] = color;
+      try {
+        await updateDoc(docRef, updateData);
+        console.log(`${field} updated to ${color}`);
+      } catch (error) {
+        console.error("Error updating document: ", error);
+      }
+    }
+
+    // Function to update the color indicator
+    function updateColorIndicator(indicator, color) {
+      if (indicator) {
+        indicator.style.backgroundColor = color;
+      }
+    }
+
+    // Event Listeners for Dropdown Changes
+    button1.addEventListener('change', () => {
+      const selectedColor = button1.value;
+      updateColor('me?', selectedColor); // Update `me?` field
+      updateColorIndicator(colorIndicator1, selectedColor); // Update the circle
+    });
+
+    button2.addEventListener('change', () => {
+      const selectedColor = button2.value;
+      updateColor('ok?', selectedColor); // Update `ok?` field
+      updateColorIndicator(colorIndicator2, selectedColor); // Update the circle
+    });
+
+    // Realtime Listener for Firestore Changes
+    onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data['me?']) {  // Use bracket notation for fields with special characters
+          button1.value = data['me?'];
+          updateColorIndicator(colorIndicator1, data['me?']);
+        }
+        if (data['ok?']) {  // Use bracket notation for fields with special characters
+          button2.value = data['ok?'];
+          updateColorIndicator(colorIndicator2, data['ok?']);
+        }
+      } else {
+        console.error("Document does not exist!");
+      }
+    });
+  </script>
+
+  <br><br>
+  <br><br>
+</body>
+</html>
