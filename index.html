@@ -8,7 +8,7 @@
 </head>
 <body>  
   <div id="color-buttons">
-    <label for="button1">CJ:</label>
+    <label for="button1">me?:</label>
     <select id="button1">
       <option value="green">Green</option>
       <option value="yellow">Yellow</option>
@@ -16,7 +16,7 @@
     </select>
     <span id="colorIndicator1" class="color-indicator"></span>
   
-    <label for="button2">OK:</label>
+    <label for="button2">ok?:</label>
     <select id="button2">
       <option value="green">Green</option>
       <option value="yellow">Yellow</option>
@@ -62,7 +62,7 @@
     const database = getFirestore(app);
 
     // Document reference
-    const docRef = doc(database, 'TrafficLightStatus', 'eLH27NEkm9wQZv06RPI3');
+    const docRef = doc(database, 'TrafficLightStatus', 'Lights');
 
     // Elements
     const button1 = document.getElementById('button1');
@@ -92,13 +92,13 @@
     // Event Listeners for Dropdown Changes
     button1.addEventListener('change', () => {
       const selectedColor = button1.value;
-      updateColor('cj', selectedColor); // Update `cj` field
+      updateColor('me?', selectedColor); // Update `me?` field
       updateColorIndicator(colorIndicator1, selectedColor); // Update the circle
     });
 
     button2.addEventListener('change', () => {
       const selectedColor = button2.value;
-      updateColor('ok', selectedColor); // Update `ok` field
+      updateColor('ok?', selectedColor); // Update `ok?` field
       updateColorIndicator(colorIndicator2, selectedColor); // Update the circle
     });
 
@@ -106,13 +106,13 @@
     onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const data = docSnap.data();
-        if (data.cj) {
-          button1.value = data.cj;
-          updateColorIndicator(colorIndicator1, data.cj);
+        if (data.me?) {
+          button1.value = data.me?;
+          updateColorIndicator(colorIndicator1, data.me?);
         }
-        if (data.ok) {
-          button2.value = data.ok;
-          updateColorIndicator(colorIndicator2, data.ok);
+        if (data.ok?) {
+          button2.value = data.ok?;
+          updateColorIndicator(colorIndicator2, data.ok?);
         }
       } else {
         console.error("Document does not exist!");
