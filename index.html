@@ -120,6 +120,42 @@
     });
   </script>
 
+<script>
+  function updateTimer() {
+    // yyyy-MM-dd HH:mm:ss
+    past = Date.parse("2022-11-24 17:54:00");
+    now = new Date();
+    diff = now - past;
+
+    years = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12));
+    months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+    weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+    days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    hours = Math.floor(diff / (1000 * 60 * 60));
+    mins = Math.floor(diff / (1000 * 60));
+    secs = Math.floor(diff / 1000);
+
+    y = years;
+    M = months - years * 12;
+    d = days - months * 30;
+    h = hours - days * 24;
+    m = mins - hours * 60;
+    s = secs - mins * 60;
+    document.getElementById("timer").innerHTML =
+      '<div><span>Time since: 24/11/2022 17:54:00</span></div><br>' +
+      '<span>122</span></div><br>' + // number of times seen (04/01/2025)
+      '<div>' + y + '<span>years</span></div>' +
+      '<div>' + M + '<span>months</span></div>' +
+      '<div>' + d + '<span>days</span></div>' +
+      '<div>' + h + '<span>hours</span></div>' +
+      '<div>' + m + '<span>minutes</span></div>' +
+      '<div>' + s + '<span>seconds</span></div><br><br>' +
+      '<div>' + days + '<span>days</span></div>';
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer(); // Initial timer update
+</script>
+
   <br><br>
   <br><br>
 </body>
