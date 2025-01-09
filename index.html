@@ -33,10 +33,10 @@
     <a href="./firstlunch.html">First Lunch Out</a>
     <a href="./askedout.html">Asked Out</a>
     <a href="./firstmorning.html">First Morning Walk</a>
-		<a href="./firstkiss.html">First Kiss</a>
-		<a href="./firsthug.html">First Hug</a>
-		<a href="./holdinghands.html">First Holding Hands</a>
-		<a href="./firstoxford.html">First Oxford Trip</a>
+    <a href="./firstkiss.html">First Kiss</a>
+    <a href="./firsthug.html">First Hug</a>
+    <a href="./holdinghands.html">First Holding Hands</a>
+    <a href="./firstoxford.html">First Oxford Trip</a>
     <a href="./firstbirmingham.html">First Birmingham Trip</a>
   </nav>
 
@@ -106,13 +106,13 @@
     onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const data = docSnap.data();
-        if (data.me?) {
-          button1.value = data.me?;
-          updateColorIndicator(colorIndicator1, data.me?);
+        if (data['me?']) {  // Use bracket notation for fields with special characters
+          button1.value = data['me?'];
+          updateColorIndicator(colorIndicator1, data['me?']);
         }
-        if (data.ok?) {
-          button2.value = data.ok?;
-          updateColorIndicator(colorIndicator2, data.ok?);
+        if (data['ok?']) {  // Use bracket notation for fields with special characters
+          button2.value = data['ok?'];
+          updateColorIndicator(colorIndicator2, data['ok?']);
         }
       } else {
         console.error("Document does not exist!");
