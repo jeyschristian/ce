@@ -7,6 +7,23 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>  
+  <div id="color-buttons">
+    <label for="button1">CJ:</label>
+    <select id="button1">
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="red">Red</option>
+    </select>
+    <span id="colorIndicator1" class="color-indicator"></span>
+  
+    <label for="button2">OK:</label>
+    <select id="button2">
+      <option value="green">Green</option>
+      <option value="yellow">Yellow</option>
+      <option value="red">Red</option>
+    </select>
+    <span id="colorIndicator2" class="color-indicator"></span>
+  </div>
 	
   <nav>
     <a href="./index.html" class="active">Met</a>
@@ -25,40 +42,82 @@
 
   <div id="timer"></div>
 
-  <script>
-    function updateTimer() {
-      // yyyy-MM-dd HH:mm:ss
-      past = Date.parse("2022-11-24 17:54:00");
-      now = new Date();
-      diff = now - past;
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getFirestore, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 
-      years = Math.floor(diff / (1000 * 60 * 60 * 24 * 30 * 12));
-      months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-      weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
-      days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      hours = Math.floor(diff / (1000 * 60 * 60));
-      mins = Math.floor(diff / (1000 * 60));
-      secs = Math.floor(diff / 1000);
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKhQ0iwwb9goPpChGJ-cHeavc3anomVdo",
+      authDomain: "ce-database.firebaseapp.com",
+      projectId: "ce-database",
+      storageBucket: "ce-database.firebasestorage.app",
+      messagingSenderId: "611746417993",
+      appId: "1:611746417993:web:5b343648df47a10397de98",
+      measurementId: "G-ED09MHFNE9"
+    };
 
-      y = years;
-      M = months - years * 12;
-      d = days - months * 30;
-      h = hours - days * 24;
-      m = mins - hours * 60;
-      s = secs - mins * 60;
-      document.getElementById("timer").innerHTML =
-        '<div><span>Time since: 24/11/2022 17:54:00</span></div><br>' +
-				'<span>122</span></div><br>' + // number of times seen (04/01/2025)
-        '<div>' + y + '<span>years</span></div>' +
-        '<div>' + M + '<span>months</span></div>' +
-        '<div>' + d + '<span>days</span></div>' +
-        '<div>' + h + '<span>hours</span></div>' +
-        '<div>' + m + '<span>minutes</span></div>' +
-        '<div>' + s + '<span>seconds</span></div><br><br>' +
-        '<div>' + days + '<span>days</span></div>';
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getFirestore(app);
+
+    // Document reference
+    const docRef = doc(database, 'TrafficLightStatus', 'eLH27NEkm9wQZv06RPI3');
+
+    // Elements
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const colorIndicator1 = document.getElementById('colorIndicator1');
+    const colorIndicator2 = document.getElementById('colorIndicator2');
+
+    // Function to update color in Firestore
+    async function updateColor(field, color) {
+      const updateData = {};
+      updateData[field] = color;
+      try {
+        await updateDoc(docRef, updateData);
+        console.log(`${field} updated to ${color}`);
+      } catch (error) {
+        console.error("Error updating document: ", error);
+      }
     }
-    setInterval(updateTimer, 1000);
-    updateTimer(); // Initial timer update
+
+    // Function to update the color indicator
+    function updateColorIndicator(indicator, color) {
+      if (indicator) {
+        indicator.style.backgroundColor = color;
+      }
+    }
+
+    // Event Listeners for Dropdown Changes
+    button1.addEventListener('change', () => {
+      const selectedColor = button1.value;
+      updateColor('cj', selectedColor); // Update `cj` field
+      updateColorIndicator(colorIndicator1, selectedColor); // Update the circle
+    });
+
+    button2.addEventListener('change', () => {
+      const selectedColor = button2.value;
+      updateColor('ok', selectedColor); // Update `ok` field
+      updateColorIndicator(colorIndicator2, selectedColor); // Update the circle
+    });
+
+    // Realtime Listener for Firestore Changes
+    onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.cj) {
+          button1.value = data.cj;
+          updateColorIndicator(colorIndicator1, data.cj);
+        }
+        if (data.ok) {
+          button2.value = data.ok;
+          updateColorIndicator(colorIndicator2, data.ok);
+        }
+      } else {
+        console.error("Document does not exist!");
+      }
+    });
   </script>
 
   <br><br>
