@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>C&E First Morning Walk</title>
+  <title>C&E First Malta Trip</title>
   <meta name="description" content="Christian and Eve">
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -19,13 +19,13 @@
     <a href="./firstfacetime.html">First FaceTime</a>
     <a href="./firstlunch.html">First Lunch Out</a>
     <a href="./askedout.html">Asked Out</a>
-    <a href="./firstmorning.html" class="active">First Morning Walk</a>
+    <a href="./firstmorning.html">First Morning Walk</a>
 		<a href="./firstkiss.html">First Kiss</a>
 		<a href="./firsthug.html">First Hug</a>
 		<a href="./holdinghands.html">First Holding Hands</a>
 		<a href="./firstoxford.html">First Oxford Trip</a>
     <a href="./firstbirmingham.html">First Birmingham Trip</a>
-    <a href="./malta.html">First Malta Trip</a>
+    <a href="./malta.html" class="active">First Malta Trip</a>
   </nav>
 
   <div id="timer"></div>
@@ -33,7 +33,7 @@
   <script>
     function updateTimer() {
       // yyyy-MM-dd HH:mm:ss
-      past = Date.parse("2023-03-14 08:00:00");
+      past = Date.parse("2024-09-08 09:10:00");
       now = new Date();
       diff = now - past;
 
@@ -52,8 +52,8 @@
       m = mins - hours * 60;
       s = secs - mins * 60;
       document.getElementById("timer").innerHTML =
-        '<div><span>Time since: 14/03/2023 08:00:00</span></div><br>' +
-        '<span>13</span></div><br>' + // number of walks (7/6)
+        '<div><span>Time since: 08/09/2024 09:10:00</span></div><br>' +
+        '<span>1</span></div><br>' + // number of Malta trips (10/02/2025)
         '<div>' + y + '<span>years</span></div>' +
         '<div>' + M + '<span>months</span></div>' +
         '<div>' + d + '<span>days</span></div>' +
